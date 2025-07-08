@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mockup Completo</title>
+  <style>
+    :root {
+      --gutter-sm: 16px;
+      --gutter-lg: 24px;
+      --padding: 32px;
+      --blue: #0033cc;
+      --gray-light: #f5f5f5;
+      --gray-lighter: #fafafa;
+      --text: #333;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Inter, Roboto, sans-serif;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 var(--padding);
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: var(--gutter-sm);
+    }
+    @media (min-width: 768px) {
+      .container { gap: var(--gutter-lg); }
+    }
+    header {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--padding) 0;
+      border-bottom: 1px solid #ddd;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: var(--gutter-lg);
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+    }
+    .btn-primary {
+      display: inline-block;
+      padding: 12px 24px;
+      background: var(--blue);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+    .separator {
+      grid-column: 1 / -1;
+      border-top: 1px solid #eee;
+      margin: var(--padding) 0;
+    }
+    .image-placeholder {
+      position: relative;
+      background: #e0e0e0;
+      width: 100%;
+      padding-top: 56.25%;
+      border: 1px dashed #ccc;
+    }
+    .image-placeholder::before {
+      content: "X";
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px;
+      color: #777;
+    }
+    /* Hero */
+    .hero {
+      grid-column: 1 / -1;
+      background: var(--gray-light);
+      text-align: center;
+      padding: var(--padding) 0;
+    }
+    .hero h1 {
+      font-size: 48px;
+      line-height: 56px;
+      margin-bottom: 16px;
+    }
+    .hero p {
+      font-size: 16px;
+      margin-bottom: 24px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    /* Services */
+    #services {
+      grid-column: 1 / -1;
+    }
+    .service-item {
+      text-align: center;
+      padding: var(--padding);
+      border: 1px solid #ddd;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .service-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .service-item h3 {
+      margin-bottom: 12px;
+      font-size: 24px;
+      line-height: 32px;
+    }
+    /* Cases */
+    #cases {
+      grid-column: 1 / -1;
+    }
+    .case-card {
+      display: flex;
+      gap: var(--gutter-sm);
+      padding: var(--padding);
+      border: 1px solid #ddd;
+    }
+    .case-info { flex: 1; }
+    .case-info h4 { margin-bottom: 8px; }
+    /* Timeline */
+    #process {
+      grid-column: 1 / -1;
+      padding: var(--padding) 0;
+    }
+    .steps {
+      display: flex;
+      gap: var(--gutter-lg);
+      flex-wrap: wrap;
+    }
+    .step {
+      flex: 1;
+      min-width: 150px;
+      text-align: center;
+    }
+    .step .icon {
+      width: 48px; height: 48px;
+      margin: 0 auto 8px;
+      background: #e0e0e0;
+      border-radius: 50%;
+      position: relative;
+    }
+    .step .icon::before {
+      content: "X"; position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      color: #777;
+    }
+    /* Team */
+    #team {
+      grid-column: 1 / -1;
+      padding: var(--padding) 0;
+    }
+    .member {
+      text-align: center;
+      padding: var(--padding);
+    }
+    .member .photo {
+      width: 120px; height: 120px;
+      margin: 0 auto 12px;
+      background: #e0e0e0;
+      border-radius: 50%;
+      position: relative;
+    }
+    .member .photo::before {
+      content: "X"; position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      color: #777;
+    }
+    /* Testimonials */
+    #testimonials {
+      grid-column: 1 / -1;
+      background: var(--gray-lighter);
+      padding: var(--padding) 0;
+    }
+    .testimonial {
+      display: flex;
+      gap: var(--gutter-sm);
+      padding: var(--padding);
+    }
+    .testimonial .avatar {
+      width: 48px; height: 48px;
+      background: #e0e0e0;
+      border-radius: 50%;
+      position: relative;
+    }
+    .testimonial .avatar::before {
+      content: "X"; position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      color: #777;
+    }
+    /* Contact & Footer */
+    #contact {
+      grid-column: 1 / -1;
+      padding: var(--padding) 0;
+    }
+    .contact-form input, .contact-form textarea {
+      width: 100%; padding: 8px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .footer {
+      grid-column: 1 / -1;
+      background: #f8f8f8;
+      padding: var(--padding) 0;
+      text-align: center;
+      font-size: 14px;
+      color: #666;
+    }
+    /* Responsive spans */
+    @media (min-width: 768px) {
+      .service-item { grid-column: span 3; }
+      .case-card { grid-column: span 6; }
+      .member { grid-column: span 3; }
+      .testimonial { grid-column: span 6; }
+    }
+    @media (max-width: 767px) {
+      .service-item, .case-card, .member, .testimonial {
+        grid-column: span 12 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="logo">Logo</div>
+      <nav>
+        <ul>
+          <li><a href="#">Servicios</a></li>
+          <li><a href="#">Casos de éxito</a></li>
+          <li><a href="#">Sobre nosotros</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Contacto</a></li>
+        </ul>
+      </nav>
+      <a href="#" class="btn-primary">Hablar con un experto</a>
+    </header>
+
+    <div class="separator"></div>
+
+    <!-- Hero -->
+    <section class="hero">
+      <h1>Lorem Ipsum Dolor Sit Amet</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non urna vitae velit.</p>
+      <a href="#" class="btn-primary">Lorem Ipsum</a>
+      <a href="#" class="btn-primary" style="background:#ffaa00">Lorem Ipsum</a>
+      <div style="margin-top:24px;">
+        <div class="image-placeholder"></div>
+      </div>
+    </section>
+
+    <div class="separator"></div>
+
+    <!-- Services -->
+    <section id="services">
+      <h2 style="grid-column:1/ -1; margin-bottom:16px;">Nuestros Servicios</h2>
+      <div class="service-item">Lorem Ipsum</div>
+      <div class="service-item">Lorem Ipsum</div>
+      <div class="service-item">Lorem Ipsum</div>
+      <div class="service-item">Lorem Ipsum</div>
+    </section>
+
+    <div class="separator"></div>
+
+    <!-- Cases -->
+    <section id="cases">
+      <h2 style="grid-column:1/ -1; margin-bottom:16px;">Casos de Éxito</h2>
+      <div class="case-card">
+        <div class="image-placeholder" style="flex:0 0 120px;"></div>
+        <div class="case-info">
+          <h4>Lorem Ipsum</h4>
+          <p>Lorem ipsum dolor sit amet.</p>
+        </div>
+      </div>
+      <div class="case-card">
+        <div class="image-placeholder" style="flex:0 0 120px;"></div>
+        <div class="case-info">
+          <h4>Lorem Ipsum</h4>
+          <p>Lorem ipsum dolor sit amet.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="separator"></div>
+
+    <!-- Process -->
+    <section id="process">
+      <h2 style="grid-column:1/ -1; margin-bottom:16px;">Proceso de Trabajo</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="icon"></div>
+          <p>Descubrimiento</p>
+        </div>
+        <div class="step">
+          <div class="icon"></div>
+          <p>Diseño</p>
+        </div>
+        <div class="step">
+          <div class="icon"></div>
+          <p>Desarrollo</p>
+        </div>
+        <div class="step">
+          <div class="icon"></div>
+          <p>Entrega</p>
+        </div>
+        <div class="step">
+          <div class="icon"></div>
+          <p>Mantenimiento</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="separator"></div>
+
+    <!-- Team -->
+    <section id="team">
+      <h2 style="grid-column:1/ -1; margin-bottom:16px;">Nuestro Equipo</h2>
+      <div class="member">
+        <div class="photo"></div>
+        <p>Lorem Ipsum<br/><small>Role</small></p>
+      </div>
+      <div class="member">
+        <div class="photo"></div>
+        <p>Lorem Ipsum<br/><small>Role</small></p>
+      </div>
+      <div class="member">
+        <div class="photo"></div>
+        <p>Lorem Ipsum<br/><small>Role</small></p>
+      </div>
+      <div class="member">
+        <div class="photo"></div>
+        <p>Lorem Ipsum<br/><small>Role</small></p>
+      </div>
+    </section>
+
+    <div class="separator"></div>
+
+    <!-- Testimonials -->
+    <section id="testimonials">
+      <h2 style="grid-column:1/ -1; margin-bottom:16px;">Testimonios</h2>
+      <div class="testimonial">
+        <div class="avatar"></div>
+        <div>
+          <p>"Lorem ipsum dolor sit amet."</p>
+          <small>- Lorem Ipsum, Empresa</small>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="avatar"></div>
+        <div>
+          <p>"Lorem ipsum dolor sit amet."</p>
+          <small>- Lorem Ipsum, Empresa</small>
+        </div>
+      </div>
+    </section>
+
+    <div class="separator"></div>
+
+    <!-- Contact -->
+    <section id="contact">
+      <h2 style="grid-column:1/ -1; margin-bottom:16px;">Contacto</h2>
+      <form class="contact-form" style="grid-column:1/span 6;">
+        <input type="text" placeholder="Nombre" />
+        <input type="email" placeholder="Email" />
+        <textarea rows="4" placeholder="Mensaje"></textarea>
+        <button class="btn-primary" type="submit">Enviar</button>
+      </form>
+      <div style="grid-column:7/span 6; padding: var(--padding) 0;">
+        <div class="image-placeholder" style="height:200px; padding-top:0;"></div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      <p>&copy; 2025 Empresa Ficticia</p>
+    </footer>
+  </div>
+</body>
+</html>
