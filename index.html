@@ -5,18 +5,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pymes Soft – Toggle Day/Night</title>
-  </head>
+    </head>
   <body>
     <!-- Toggle -->
     <input type="checkbox" id="theme-toggle" />
-    <label for="theme-toggle" class="theme-switch">🌓</label>
+    <label for="theme-toggle" class="theme-switch">
+      <span class="sun">☀️</span>
+    <span class="moon">🌙</span>
+</label>
 
     <!-- Page wrapper -->
     <div class="page">
-      <div class="wrapper">
-        <!-- Header -->
-        <header>
-          <div class="logo">Pymes Soft</div>
+    <!-- Sentinel para activación del snap -->
+    <div class="spacer"></div>
+    
+      <!-- Header sticky -->
+      <header>
+        <div class="header-content">
+          <a href="#" class="logo">Pymes Soft</a>
           <nav>
             <ul>
               <li><a href="#services">Servicios</a></li>
@@ -27,11 +33,11 @@
               <li><a href="#contact">Contacto</a></li>
             </ul>
           </nav>
-          <a href="#contact" class="btn-primary">Hablar con un experto</a>
-        </header>
+        </div>
+      </header>
 
-        <div class="separator"></div>
-
+      <div class="wrapper">
+        
         <!-- Hero -->
         <section class="hero">
           <h1>Somos Pymes Soft</h1>
@@ -46,10 +52,12 @@
             <a href="#services" class="btn-secondary">Ver Servicios</a>
           </div>
           <div class="image-container">
-            <img src="src/images/PYMES.webp" alt="Pymes Soft" />
+            <img src="src/images/1010066.jpg" alt="Pymes Soft" />
           </div>
         </section>
 
+        <div class="separator"></div>
+        
         <!-- Servicios -->
         <div class="section-title">Nuestros Servicios</div>
         <section id="services">
@@ -102,23 +110,33 @@
           <div class="section-title">Proceso de Trabajo</div>
           <div class="steps">
             <div class="step">
-              <div class="icon"></div>
+              <div class="icon">
+                <img src="src/images/Descubrimiento.webp" alt="Descubrimiento" />
+              </div>
               <p>Descubrimiento</p>
             </div>
             <div class="step">
-              <div class="icon"></div>
+              <div class="icon">
+                <img src="src/images/Diseno.webp" alt="Diseño" />
+              </div>
               <p>Diseño</p>
             </div>
             <div class="step">
-              <div class="icon"></div>
+              <div class="icon">
+                <img src="src/images/Desarrollo.png" alt="Desarrollo" />
+              </div>
               <p>Desarrollo</p>
             </div>
             <div class="step">
-              <div class="icon"></div>
+              <div class="icon">
+                <img src="src/images/Entrega.webp" alt="Entrega" />
+              </div>
               <p>Entrega</p>
             </div>
             <div class="step">
-              <div class="icon"></div>
+              <div class="icon">
+                <img src="src/images/Mantenimiento.jpg" alt="Mantenimiento" />
+              </div>
               <p>Mantenimiento</p>
             </div>
           </div>
