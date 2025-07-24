@@ -1,18 +1,19 @@
 /* Día (flat 2025) */
 :root {
-  --bg: #f9fafb;
+  --bg: #fef7ed;          /* Naranja muy claro */
   --panel: #ffffff;
-  --fg: #1f2937;
-  --border: #e5e7eb;
-  --accent-primary: #3b82f6;
-  --accent-secondary: #10b981;
-  --accent-hover-primary: #2563eb;
-  --accent-hover-sec: #059669;
-  --comment: #6b7280;
+  --fg: #1c1917;          /* Casi negro cálido */
+  --border: #fed7aa;      /* Naranja claro */
+  --accent-primary: #ea580c;  /* Naranja */
+  --accent-secondary: #dc2626; /* Rojo */
+  --accent-hover-primary: #c2410c;
+  --accent-hover-sec: #b91c1c;
+  --comment: #78716c;
 }
 
-/* Noche (Cyberpunk) */
-#theme-toggle:checked ~ .page {
+/* Noche (Cyberpunk) para .page y .theme-switch */
+#theme-toggle:checked ~ .page,
+#theme-toggle:checked + .theme-switch {
   --bg: #0d0d0d;
   --panel: #1a1a30;
   --fg: #e0e0e0;
@@ -24,6 +25,16 @@
   --comment: #8888aa;
 }
 
+#theme-toggle {
+  position: fixed;
+  top: -100px; /* lo oculta visualmente fuera de la pantalla */
+}
+
+/* Filtro solo en modo noche */
+#theme-toggle:checked ~ .page .map-wrapper iframe {
+  filter: invert(0.9) hue-rotate(180deg);
+}
+
 /* Reset */
 * {
   box-sizing: border-box;
@@ -31,16 +42,23 @@
   padding: 0;
 }
 
-/* Página wrapper */
+/* Página wrapper - SIN padding-top porque sticky no lo necesita */
 .page {
   background: var(--bg);
   min-height: 100vh;
   transition: background 0.3s;
+  /* padding-top: 64px; <- ELIMINADO */
 }
 
 /* Toggle circular */
-#theme-toggle {
-  display: none;
+#theme-toggle:checked + .theme-switch .sun {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+#theme-toggle:checked + .theme-switch .moon {
+  opacity: 1;
+  transform: scale(1);
 }
 .theme-switch {
   position: fixed;
@@ -55,13 +73,43 @@
   align-items: center;
   justify-content: center;
   color: var(--fg);
-  font-size: 20px;
+  font-size: 24px;
   cursor: pointer;
   transition: background 0.3s, border-color 0.3s, color 0.3s;
-  z-index: 1000;
+  z-index: 1001;
 }
+
 .theme-switch:hover {
   background: var(--border);
+}
+
+/* Iconos del toggle */
+.theme-switch .sun,
+.theme-switch .moon {
+  position: absolute;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Estado inicial: mostrar sol, ocultar luna */
+.theme-switch .sun {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.theme-switch .moon {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+/* Cuando está activado el modo oscuro: mostrar luna, ocultar sol */
+#theme-toggle:checked ~ .page .theme-switch .sun {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+#theme-toggle:checked ~ .page .theme-switch .moon {
+  opacity: 1;
+  transform: scale(1);
 }
 
 /* Layout interno */
@@ -82,14 +130,15 @@
 }
 
 /* Tipografía y botones */
-body {
-  color: var(--fg);
-  font-family: Inter, Roboto, sans-serif;
-  line-height: 1.5;
+.body {
+  margin: 0;
+  scroll-snap-type: y proximity;
+  scroll-behavior: smooth;  /* opcional, para animación suave */
 }
 .logo {
   font-size: 28px;
   font-weight: bold;
+  text-decoration: none;
   color: var(--accent-primary);
 }
 nav ul {
@@ -131,22 +180,50 @@ nav a:hover {
   background: var(--accent-hover-sec);
 }
 
-/* Secciones */
+.spacer {
+  scroll-snap-align: start;   /* punto de encaje en la parte superior */
+}
+
+
+/* Header sticky */
 header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  z-index: 1000;
+  scroll-snap-align: start;   /* al acercarse al top, encaja aquí */
+  transition: transform 0.3s ease;
+}
+.header-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 32px 0;
+  padding: 20px ;
   flex-wrap: wrap;
   gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 32px;
+  padding-right: 80px; /* Espacio para el toggle */
 }
+
+@media (min-width: 768px) {
+  .header-content {
+    padding-left: 48px;
+    padding-right: 80px;
+  }
+}
+
 .hero {
   background: var(--panel);
   text-align: center;
   padding: 48px 32px;
   border: 1px solid var(--border);
   border-radius: 8px;
-  margin-bottom: 32px;
+  margin-bottom: 16px;
 }
 .hero h1 {
   font-size: 48px;
@@ -179,7 +256,14 @@ header {
   color: var(--accent-primary);
 }
 
+.content-block {
+  min-height: 100vh;          /* forzar "pantalla completa" */
+  padding: 48px 0;
+  scroll-snap-align: start;   /* cada sección encaja tras el header */
+}
+
 /* Servicios */
+
 #services {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -214,6 +298,7 @@ header {
 }
 
 /* Trabajos realizados */
+
 #works {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -255,6 +340,7 @@ header {
 }
 
 /* Proceso */
+
 #process {
   background: var(--panel);
   padding: 48px 32px;
@@ -270,28 +356,36 @@ header {
 }
 .step {
   flex: 1;
-  min-width: 120px;
+  min-width: 140px;
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 16px;
+  padding: 20px 16px;
   text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.step:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 .step .icon {
-  width: 48px;
-  height: 48px;
-  margin: 0 auto 8px;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 12px;
   background: var(--border);
   border-radius: 50%;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
-.step .icon::before {
-  content: "✓";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: var(--fg);
+/* Removemos el ::before ya que ahora usamos imágenes */
+.step .icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 .step p {
   font-size: 14px;
@@ -449,12 +543,13 @@ header {
   border: 1px solid var(--border);
   min-height: 300px;
 }
+/* Día: sin filtro */
 .map-wrapper iframe {
   width: 100%;
   height: 100%;
   min-height: 300px;
   border: 0;
-  filter: invert(0.9) hue-rotate(180deg);
+  filter: none;
 }
 
 /* Footer */
@@ -473,9 +568,11 @@ footer {
     padding: 0 16px;
   }
   
-  header {
+  .header-content {
     flex-direction: column;
     text-align: center;
+    padding-left: 16px;
+    padding-right: 80px;
   }
   
   .hero h1 {
